@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "userProfile": {
+      "title": "User Profile",
+      "description": "Stores user preferences and subscription status.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["fr", "en", "ht"],
+          "description": "Preferred language (French, English, Haitian Creole)"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["student", "researcher", "professor", "admin"]
+        },
+        "subscriptionTier": {
+          "type": "string",
+          "enum": ["free", "premium", "institutional"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "language", "subscriptionTier", "createdAt"]
+    },
+    "savedResource": {
+      "title": "Saved Resource",
+      "description": "A book, article, or thesis saved by the user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "savedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "resourceId", "title", "savedAt"]
+    },
+    "generatedResearch": {
+      "title": "Generated Research",
+      "description": "AI-generated research topics or structures saved by the user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["topic", "structure", "methodology"]
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "type", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/userProfile"
+      },
+      "description": "User profiles."
+    },
+    "/users/{userId}/savedResources/{resourceId}": {
+      "schema": {
+        "$ref": "#/entities/savedResource"
+      },
+      "description": "Resources saved by a specific user."
+    },
+    "/users/{userId}/generatedResearch/{researchId}": {
+      "schema": {
+        "$ref": "#/entities/generatedResearch"
+      },
+      "description": "AI-generated research saved by a specific user."
+    }
+  }
+}

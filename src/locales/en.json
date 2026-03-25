@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "library": "Library",
+    "assistant": "AI Assistant",
+    "citations": "Citations",
+    "learning": "Learning",
+    "signOut": "Sign Out"
+  },
+  "login": {
+    "welcome": "Welcome Back",
+    "subtitle": "Sign in to continue your research journey",
+    "continueGoogle": "Continue with Google",
+    "terms": "By continuing, you agree to our Terms of Service and Privacy Policy.",
+    "empowering": "Empowering Research & Academic Excellence",
+    "feature1Title": "Digital Library",
+    "feature1Desc": "Access thousands of academic resources, theses, and articles offline and online.",
+    "feature2Title": "AI Methodology Assistant",
+    "feature2Desc": "Generate research topics, thesis structures, and get writing guidance instantly.",
+    "feature3Title": "Learning Modules",
+    "feature3Desc": "Master research methodology with built-in mini-courses and interactive quizzes."
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "subtitle": "Ready to advance your research today?",
+    "aiAssistantDesc": "Generate topics, thesis structures, and get writing help.",
+    "startResearch": "Start Research",
+    "libraryDesc": "Access thousands of academic papers, books, and theses.",
+    "browseCatalog": "Browse Catalog",
+    "citationsDesc": "Quickly format your references in APA, MLA, or Chicago.",
+    "createCitation": "Create Citation",
+    "recentActivity": "Recent Activity",
+    "viewAll": "View All",
+    "recommended": "Recommended for You"
+  },
+  "assistant": {
+    "title": "AI Methodology Assistant",
+    "subtitle": "Generate research topics, thesis structures, and methodology guidance.",
+    "helpQuestion": "What do you need help with?",
+    "generateTopics": "Generate Topics & Problem Statement",
+    "createStructure": "Create Thesis Structure (Ch 1-5)",
+    "explainMethodology": "Explain Research Methodology",
+    "enterKeywords": "Enter keywords or field of study:",
+    "enterTopic": "Enter your research topic:",
+    "placeholderKeywords": "e.g., Microfinance, Women Empowerment, Haiti",
+    "placeholderTopic": "e.g., The impact of microfinance on women in rural Haiti",
+    "generateBtn": "Generate",
+    "generatingBtn": "Generating...",
+    "result": "Result",
+    "saveToDashboard": "Save to Dashboard",
+    "emptyState": "Select a task type, enter your keywords or topic, and click Generate to get AI-powered academic assistance.",
+    "error": "Failed to generate content. Please try again."
+  }
+}

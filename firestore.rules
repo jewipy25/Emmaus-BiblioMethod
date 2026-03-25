@@ -1,0 +1,102 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function uidUnchanged() {
+      return !('uid' in request.resource.data) || request.resource.data.uid == request.auth.uid;
+    }
+    
+    function uidNotModified() {
+      return !('uid' in request.resource.data) || request.resource.data.uid == resource.data.uid;
+    }
+    
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+    
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+    
+    function isValidUserProfile() {
+      let data = request.resource.data;
+      return hasRequiredFields(['uid', 'email', 'language', 'subscriptionTier', 'createdAt']) &&
+             data.uid is string && data.uid.size() > 0 && data.uid.size() < 100 &&
+             data.email is string && isValidEmail(data.email) && data.email.size() < 150 &&
+             (!('displayName' in data) || (data.displayName is string && data.displayName.size() < 100)) &&
+             data.language in ['fr', 'en', 'ht'] &&
+             (!('role' in data) || data.role in ['student', 'researcher', 'professor', 'admin']) &&
+             data.subscriptionTier in ['free', 'premium', 'institutional'] &&
+             data.createdAt is string; // using string for ISO dates in this simple app
+    }
+
+    function isValidSavedResource() {
+      let data = request.resource.data;
+      return hasRequiredFields(['userId', 'resourceId', 'title', 'savedAt']) &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() < 100 &&
+             data.resourceId is string && data.resourceId.size() > 0 && data.resourceId.size() < 100 &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 300 &&
+             (!('category' in data) || (data.category is string && data.category.size() < 100)) &&
+             data.savedAt is string;
+    }
+
+    function isValidGeneratedResearch() {
+      let data = request.resource.data;
+      return hasRequiredFields(['userId', 'type', 'content', 'createdAt']) &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() < 100 &&
+             data.type in ['topic', 'structure', 'methodology'] &&
+             data.content is string && data.content.size() > 0 && data.content.size() < 50000 &&
+             data.createdAt is string;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      // Users can create their own profile, but cannot assign themselves admin role initially
+      allow create: if isOwner(userId) && isValidUserProfile() && uidUnchanged() && 
+                    (!('role' in request.resource.data) || request.resource.data.role != 'admin');
+      // Users can update their own profile, but cannot change their uid or escalate role to admin
+      allow update: if isOwner(userId) && isValidUserProfile() && uidNotModified() &&
+                    (!('role' in request.resource.data) || request.resource.data.role == resource.data.role);
+      allow delete: if isOwner(userId);
+
+      match /savedResources/{resourceId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidSavedResource() && request.resource.data.userId == userId;
+        allow update: if isOwner(userId) && isValidSavedResource() && request.resource.data.userId == userId && request.resource.data.userId == resource.data.userId;
+        allow delete: if isOwner(userId);
+      }
+
+      match /generatedResearch/{researchId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidGeneratedResearch() && request.resource.data.userId == userId;
+        allow update: if isOwner(userId) && isValidGeneratedResearch() && request.resource.data.userId == userId && request.resource.data.userId == resource.data.userId;
+        allow delete: if isOwner(userId);
+      }
+    }
+  }
+}

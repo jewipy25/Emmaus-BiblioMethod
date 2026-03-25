@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "library": "Bibliothèque",
+    "assistant": "Assistant IA",
+    "citations": "Citations",
+    "learning": "Apprentissage",
+    "signOut": "Se déconnecter"
+  },
+  "login": {
+    "welcome": "Bon retour",
+    "subtitle": "Connectez-vous pour continuer vos recherches",
+    "continueGoogle": "Continuer avec Google",
+    "terms": "En continuant, vous acceptez nos conditions d'utilisation et notre politique de confidentialité.",
+    "empowering": "Autonomiser la recherche et l'excellence académique",
+    "feature1Title": "Bibliothèque numérique",
+    "feature1Desc": "Accédez à des milliers de ressources académiques, thèses et articles hors ligne et en ligne.",
+    "feature2Title": "Assistant de méthodologie IA",
+    "feature2Desc": "Générez des sujets de recherche, des structures de thèse et obtenez des conseils de rédaction instantanément.",
+    "feature3Title": "Modules d'apprentissage",
+    "feature3Desc": "Maîtrisez la méthodologie de recherche avec des mini-cours intégrés et des quiz interactifs."
+  },
+  "dashboard": {
+    "welcome": "Bienvenue",
+    "subtitle": "Prêt à faire avancer vos recherches aujourd'hui ?",
+    "aiAssistantDesc": "Générez des sujets, des structures de thèse et obtenez de l'aide pour rédiger.",
+    "startResearch": "Commencer la recherche",
+    "libraryDesc": "Accédez à des milliers d'articles académiques, de livres et de thèses.",
+    "browseCatalog": "Parcourir le catalogue",
+    "citationsDesc": "Formatez rapidement vos références en APA, MLA ou Chicago.",
+    "createCitation": "Créer une citation",
+    "recentActivity": "Activité récente",
+    "viewAll": "Voir tout",
+    "recommended": "Recommandé pour vous"
+  },
+  "assistant": {
+    "title": "Assistant de méthodologie IA",
+    "subtitle": "Générez des sujets de recherche, des structures de thèse et des conseils méthodologiques.",
+    "helpQuestion": "En quoi avez-vous besoin d'aide ?",
+    "generateTopics": "Générer des sujets et une problématique",
+    "createStructure": "Créer une structure de thèse (Ch 1-5)",
+    "explainMethodology": "Expliquer la méthodologie de recherche",
+    "enterKeywords": "Entrez des mots-clés ou un domaine d'étude :",
+    "enterTopic": "Entrez votre sujet de recherche :",
+    "placeholderKeywords": "ex: Microfinance, Autonomisation des femmes, Haïti",
+    "placeholderTopic": "ex: L'impact de la microfinance sur les femmes en Haïti rurale",
+    "generateBtn": "Générer",
+    "generatingBtn": "Génération en cours...",
+    "result": "Résultat",
+    "saveToDashboard": "Enregistrer dans le tableau de bord",
+    "emptyState": "Sélectionnez un type de tâche, entrez vos mots-clés ou votre sujet, et cliquez sur Générer pour obtenir une assistance académique alimentée par l'IA.",
+    "error": "Échec de la génération du contenu. Veuillez réessayer."
+  }
+}
